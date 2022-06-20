@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="card mb-3" *ngFor="let articlePreview of articlePreviewList">
+        <div class="card-header">
+            <h3>{{articlePreview.subject}}</h3>
+            <div class="text-muted">
+                by <span class="et-bold-text">{{articlePreview.user.username}}</span> in <span class="et-bold-text">
+                    {{articlePreview.product}}</span>
+                <span class="pull-xs-right">
+                    <span class="material-symbols-outlined et-fs-1">
+                        calendar_month
+                    </span> {{ articlePreview.createdOn | stringToDate }}
+                </span>
+                
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{articlePreview.body}}</p>
+            <button class="btn btn-link" (click)="openArticleDetails(articlePreview.id)">View in detail</button>
+        </div>
+    </div>
+</div>

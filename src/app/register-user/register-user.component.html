@@ -1,0 +1,49 @@
+<div class="auth-page">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">{{ title }}</h1>
+                <p class="text-xs-center">
+                    <a [routerLink]="['/login']">Have an account?</a>
+                </p>
+                <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+                <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+                    <fieldset [disabled]="isSubmitting">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingUsername" placeholder="username"
+                                formControlName="username">
+                            <label for="floatingUsername">Username <span class="danger-color ">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                formControlName="password">
+                            <label for="floatingPassword">Password <span class="danger-color ">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingConfirmPassword"
+                                placeholder="confirm password" formControlName="confirmPassword">
+                            <label for="floatingConfirmPassword">confirm password <span class="danger-color ">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingFirstName" placeholder="first name"
+                                formControlName="firstName">
+                            <label for="floatingFirstName">first name <span class="danger-color ">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingLastName" placeholder="last name"
+                                formControlName="lastName">
+                            <label for="floatingLastName">last name <span class="danger-color ">*</span></label>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+                            {{ title }}
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

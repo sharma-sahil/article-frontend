@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="card mb-3" *ngIf="articleDetail">
+        <div class="card-body">
+            <h3 class="card-title"> {{articleDetail.subject}}</h3>
+            <p class="card-text">{{articleDetail.body}}</p>
+        </div>
+        <div class="card-footer text-muted">
+            by <span class="et-bold-text">{{articleDetail.user.username}}</span> in <span class="et-bold-text">
+                {{articleDetail.product}}</span>
+            <span class="pull-xs-right">
+                <span class="material-symbols-outlined et-fs-1">
+                    calendar_month
+                </span> {{ articleDetail.createdOn | stringToDate }}
+            </span>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="articleDetail">
+        <form [formGroup]="commentForm" (ngSubmit)="submitForm()">
+            <fieldset [disabled]="isSubmitting">
+                <div class="card mb-3 et-w-90 pull-xs-right">
+                    <div class="card-body et-p-0">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="addCommentInput" rows="3"
+                                formControlName="comment"></textarea>
+                            <label for="addCommentInput">Post a new Comment <span class="danger-color ">*</span></label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary pull-xs-right" [disabled]="!commentForm.valid" type="submit">
+                            Submit
+                        </button>
+
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="container" *ngIf="articleDetail">
+        <div class="card mb-3 et-w-90 pull-xs-right" *ngFor="let comment of articleDetail.replies">
+            <div class="card-body">
+                <p class="card-text">{{comment.body}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                by {{comment.username}}
+                <span class="pull-xs-right">
+                    <span class="material-symbols-outlined et-fs-1">
+                        calendar_month
+                    </span> {{ comment.createdOn | stringToDate }}
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
