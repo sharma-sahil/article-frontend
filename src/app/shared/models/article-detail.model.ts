@@ -9,4 +9,5 @@ export interface ArticleDetails {
     user : UserResponse;
     createdOn: string;
     replies: CommentResponse[];
+    status: string;
 }

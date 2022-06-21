@@ -81,7 +81,6 @@ export class UserService {
     return this.apiService.post(route, userDetails)
       .pipe(map(
         data => {
-          // this.setAuth(data.user);
           return data;
         }
       ));

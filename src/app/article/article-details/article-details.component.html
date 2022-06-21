@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div class="container" *ngIf="articleDetail">
+    <div class="container" *ngIf="articleDetail && articleDetail.status == 'OPEN'">
         <form [formGroup]="commentForm" (ngSubmit)="submitForm()">
             <fieldset [disabled]="isSubmitting">
                 <div class="card mb-3 et-w-90 pull-xs-right">

@@ -3,17 +3,25 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { JwtService } from './jwt.service';
+import { UserService } from './user.service';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private jwtService: JwtService) { }
+  constructor(
+    private router: Router,
+    private jwtService: JwtService,
+    private userService: UserService
+  ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const headersConfig = {
@@ -29,6 +37,18 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const req = request.clone({ setHeaders: headersConfig });
-    return next.handle(req);
+    return next.handle(req).pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 403) {
+            this.userService.purgeAuth();
+            this.router.navigate(['/dashboard']);
+          } else if (error.status == 401) {
+            this.userService.purgeAuth();
+            this.router.navigate(['/dashboard']);
+          }
+        }
+        return throwError(error);
+      }));
   }
 }

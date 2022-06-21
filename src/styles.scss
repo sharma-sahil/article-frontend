@@ -47,8 +47,13 @@ body {
     text-decoration: none;
 }
 
+.et-dashboard-title {
+    margin-top: 20%;
+}
 
-// utility classes
+.et-highlight-pointer {
+    cursor: pointer;
+}
 
 .et-fs-1 {
     font-size: 1rem !important;

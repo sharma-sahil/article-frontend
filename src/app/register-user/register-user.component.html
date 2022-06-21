@@ -7,7 +7,10 @@
                 <p class="text-xs-center">
                     <a [routerLink]="['/login']">Have an account?</a>
                 </p>
-                <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+
+                <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+                    {{errorMessage}}
+                  </div>
                 <form [formGroup]="authForm" (ngSubmit)="submitForm()">
                     <fieldset [disabled]="isSubmitting">
 

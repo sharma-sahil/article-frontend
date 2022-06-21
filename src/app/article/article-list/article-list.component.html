@@ -1,4 +1,47 @@
 <div class="container">
+
+    <ul class="nav nav-tabs mb-5">
+        <li class="nav-item">
+            <button class="nav-link" [ngClass]="{'active': activeTab == 'MY_FEED'}" (click)="showMyFeed()">My
+                Questions</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" [ngClass]="{'active': activeTab == 'GLOBAL_FEED'}" (click)="showGlobalFeed()">All
+                Questions</button>
+        </li>
+    </ul>
+
+    <div class="row justify-content-center" *ngIf="activeTab == 'GLOBAL_FEED'">
+        <div class="col-md-6 col-sm-12">
+            <div class="input-group flex-nowrap">
+                <input type="text" class="form-control" placeholder="search Questions" aria-label="searchText"
+                    aria-describedby="addon-wrapping" [(ngModel)]="searchText">
+                <button class="input-group-text" id="addon-wrapping" (click)="searchQuestions()">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example" *ngIf="showPagination">
+        <ul class="pagination justify-content-end">
+            <li class="page-item et-highlight-pointer" [ngClass]="{'disabled': firstPageLinkDisabled}">
+                <a class="page-link" aria-label="Previous" (click)="firstPage()">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item et-highlight-pointer" *ngFor="let pageNum of pageNumberArr">
+                <a class="page-link" (click)="changePage(pageNum)">{{pageNum}}</a>
+            </li>
+            <li class="page-item et-highlight-pointer" [ngClass]="{'disabled': lastPageLinkDisabled}">
+                <a class="page-link" aria-label="Next" (click)="lastPage()">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <div class="card mb-3" *ngFor="let articlePreview of articlePreviewList">
         <div class="card-header">
             <h3>{{articlePreview.subject}}</h3>
@@ -10,7 +53,7 @@
                         calendar_month
                     </span> {{ articlePreview.createdOn | stringToDate }}
                 </span>
-                
+
             </div>
         </div>
         <div class="card-body">

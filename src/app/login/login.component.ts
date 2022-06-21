@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   errors: Errors = { errors: {} };
   isSubmitting = false;
   authForm: FormGroup;
+  loginErrorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +59,14 @@ export class LoginComponent implements OnInit {
         err => {
           console.log({err})
           this.errors = err;
+          if(err.message) {
+            this.loginErrorMessage = err.message;
+          } else {
+            this.loginErrorMessage = 'Login Failed!!. Please check credentials or try again after some time.'
+          }
+          setTimeout(() => {
+            this.loginErrorMessage = '';
+          }, 5000, this);
           this.isSubmitting = false;
           this.cd.markForCheck();
         }
