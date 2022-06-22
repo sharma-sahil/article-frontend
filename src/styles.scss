@@ -139,3 +139,16 @@ body {
         float: none!important
     }
 }
+
+.pt-10 {
+    padding-top: 10rem !important;
+}
+
+.et-box-shadow {
+    box-shadow: 0 0.188rem 0.375rem 0 rgba(0, 0, 0, 0.16);
+}
+
+.et-round-border {
+    --bs-alert-padding-y: 0.5rem;
+    border-radius: 2rem;
+}

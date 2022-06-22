@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="card mb-3" *ngIf="articleDetail">
+<div class="container pt-5">
+    <div class="card mb-3 et-box-shadow " *ngIf="articleDetail">
         <div class="card-body">
             <h3 class="card-title"> {{articleDetail.subject}}</h3>
             <p class="card-text">{{articleDetail.body}}</p>
@@ -18,7 +18,7 @@
     <div class="container" *ngIf="articleDetail && articleDetail.status == 'OPEN'">
         <form [formGroup]="commentForm" (ngSubmit)="submitForm()">
             <fieldset [disabled]="isSubmitting">
-                <div class="card mb-3 et-w-90 pull-xs-right">
+                <div class="card mb-3 et-w-90 pull-xs-right et-box-shadow ">
                     <div class="card-body et-p-0">
                         <div class="form-floating">
                             <textarea class="form-control" id="addCommentInput" rows="3"
@@ -38,9 +38,17 @@
     </div>
 
     <div class="container" *ngIf="articleDetail">
-        <div class="card mb-3 et-w-90 pull-xs-right" *ngFor="let comment of articleDetail.replies">
+        <div class="card mb-3 et-w-90 pull-xs-right et-box-shadow " *ngFor="let comment of articleDetail.replies">
             <div class="card-body">
-                <p class="card-text">{{comment.body}}</p>
+                <div class="card-text row">
+                    <div class="col">
+                        {{comment.body}}
+                    </div>
+                    <div class="col-auto">
+                        <button *ngIf="articleDetail && articleDetail.status == 'OPEN'" class="btn btn-outline-success" (click)="closeArticle(comment.id)"> Approve answer</button>
+                    </div>
+
+                </div>
             </div>
             <div class="card-footer text-muted">
                 by {{comment.username}}

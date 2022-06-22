@@ -50,7 +50,7 @@ export class ArticleService {
       ));
   }
 
-  getAllProducts() : Observable<Product[]> {
+  getAllProducts(): Observable<Product[]> {
     const route = '/product';
 
     return this.apiService.get(route)
@@ -77,10 +77,22 @@ export class ArticleService {
       ));
   }
 
-  postArticle(requestBody: any) : Observable<ArticleDetails> {
+  postArticle(requestBody: any): Observable<ArticleDetails> {
     const route = '/question';
 
     return this.apiService.post(route, requestBody)
+      .pipe(map(
+        data => {
+          console.log({ data });
+          return data;
+        }
+      ));
+  }
+
+  closeQuestion(questionId: number, replyId: number): Observable<ArticleDetails> {
+    const route = '/question/' + questionId + '/close?acceptedReply=' + replyId;
+
+    return this.apiService.put(route)
       .pipe(map(
         data => {
           console.log({ data });

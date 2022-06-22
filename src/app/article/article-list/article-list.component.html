@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-5">
 
     <ul class="nav nav-tabs mb-5">
         <li class="nav-item">
@@ -42,9 +42,19 @@
             </li>
         </ul>
     </nav>
-    <div class="card mb-3" *ngFor="let articlePreview of articlePreviewList">
+    <div class="card mb-3 et-box-shadow" *ngFor="let articlePreview of articlePreviewList">
         <div class="card-header">
-            <h3>{{articlePreview.subject}}</h3>
+            <div class="row">
+
+                <div class="col">
+                    <h3>{{articlePreview.subject}}</h3>
+                </div>
+                <div class="col-auto">
+                    <p *ngIf="articlePreview.status == 'CLOSED'" class="alert alert-success et-round-border"> Article closed</p>
+                </div>
+            </div>
+
+
             <div class="text-muted">
                 by <span class="et-bold-text">{{articlePreview.user.username}}</span> in <span class="et-bold-text">
                     {{articlePreview.product}}</span>

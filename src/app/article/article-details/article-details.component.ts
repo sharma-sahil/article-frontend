@@ -65,4 +65,15 @@ export class ArticleDetailsComponent implements OnInit {
       );
   }
 
+  closeArticle(commentId: number) {
+    this.articleService.closeQuestion(this.articleId, commentId).subscribe(
+      data => {
+        this.articleDetail = data;
+      },
+      err => {
+        console.log({ err });
+      }
+    )
+  }
+
 }
