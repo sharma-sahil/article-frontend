@@ -1,4 +1,11 @@
 <div class="container pt-5">
+
+    <div class="row justify-content-center mt-3" *ngIf="showArticleClosed">
+        <div class="col-md-6 col-sm-12 text-center alert alert-success">
+            <h3> Article Closed.</h3>
+        </div>
+    </div>
+
     <div class="card mb-3 et-box-shadow " *ngIf="articleDetail">
         <div class="card-body">
             <h3 class="card-title"> {{articleDetail.subject}}</h3>
@@ -45,7 +52,12 @@
                         {{comment.body}}
                     </div>
                     <div class="col-auto">
-                        <button *ngIf="articleDetail && articleDetail.status == 'OPEN'" class="btn btn-outline-success" (click)="closeArticle(comment.id)"> Approve answer</button>
+                        <button *ngIf="articleDetail && articleDetail.status == 'OPEN'" class="btn btn-outline-success"
+                            (click)="closeArticle(comment.id)"> Approve answer</button>
+                    </div>
+                    <div class="col-auto">
+                        <p *ngIf="articleDetail && comment.acceptedAnswer" class="alert alert-success et-round-border">
+                            Approved Answer</p>
                     </div>
 
                 </div>

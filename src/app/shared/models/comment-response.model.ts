@@ -4,4 +4,5 @@ export interface CommentResponse {
     body: string;
     createdOn: string;
     username: string;
+    acceptedAnswer: boolean;
 }

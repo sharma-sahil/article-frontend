@@ -33,6 +33,8 @@ export class ArticleListComponent implements OnInit {
 
   searchTextPrivate = '';
 
+  showNoDataFound = false;
+
   constructor(
     private router: Router,
     private articleService: ArticleService,
@@ -44,12 +46,16 @@ export class ArticleListComponent implements OnInit {
   }
 
   private getUserArticles() {
+    this.showNoDataFound = true;
     this.articleService.getUserArticles(this.pageNumber, this.pageSize).subscribe(
       data => {
         this.articlePreviewList = data.data;
         this.pageNumber = data.pageNumber;
         this.totalPages = data.totalPages;
         this.totalRecords = data.totalRecords;
+        if(this.totalRecords <= 0) {
+          this.showNoDataFound = true;
+        }
         this.updatePagination();
       },
       err => {
@@ -75,6 +81,7 @@ export class ArticleListComponent implements OnInit {
     this.activeTab = 'GLOBAL_FEED';
     this.articlePreviewList = [];
     this.resetPagination();
+    this.showNoDataFound = false;
   }
 
   resetPagination() {
@@ -105,6 +112,10 @@ export class ArticleListComponent implements OnInit {
     } else {
       this.lastPageLinkDisabled = false;
     }
+    if(this.totalPages == 0) {
+      this.lastPageLinkDisabled = true;
+      this.firstPageLinkDisabled = true;
+    }
   }
 
   searchQuestions() {
@@ -115,6 +126,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   private getFilteredQuestions() {
+    this.showNoDataFound = false;
     this.articleService.searchQuestions(this.searchTextPrivate, this.pageNumber, this.pageSize).subscribe(
       data => {
         console.log({ data });
@@ -123,6 +135,9 @@ export class ArticleListComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.totalRecords = data.totalRecords;
         this.searchText = '';
+        if(this.totalRecords <= 0) {
+          this.showNoDataFound = true;
+        }
         this.updatePagination();
       },
       err => {

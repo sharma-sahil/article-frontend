@@ -25,7 +25,16 @@
         </div>
     </div>
 
-    <nav aria-label="Page navigation example" *ngIf="showPagination">
+    <div class="row justify-content-center mt-3" *ngIf="showNoDataFound">
+        <div class="col-md-6 col-sm-12 text-center">
+            <h2>
+                <span class="material-symbols-outlined"> error </span>
+                No Data Found
+            </h2>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example" *ngIf="showPagination && totalRecords > 0">
         <ul class="pagination justify-content-end">
             <li class="page-item et-highlight-pointer" [ngClass]="{'disabled': firstPageLinkDisabled}">
                 <a class="page-link" aria-label="Previous" (click)="firstPage()">
@@ -50,7 +59,8 @@
                     <h3>{{articlePreview.subject}}</h3>
                 </div>
                 <div class="col-auto">
-                    <p *ngIf="articlePreview.status == 'CLOSED'" class="alert alert-success et-round-border"> Article closed</p>
+                    <p *ngIf="articlePreview.status == 'CLOSED'" class="alert alert-success et-round-border"> Article
+                        closed</p>
                 </div>
             </div>
 

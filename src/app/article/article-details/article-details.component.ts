@@ -19,6 +19,8 @@ export class ArticleDetailsComponent implements OnInit {
 
   commentForm: FormGroup;
 
+  showArticleClosed = false;
+
   constructor(
     private route: ActivatedRoute,
     private articleService: ArticleService,
@@ -41,8 +43,6 @@ export class ArticleDetailsComponent implements OnInit {
       }
     )
   }
-
-
 
   submitForm() {
     this.isSubmitting = true;
@@ -69,6 +69,10 @@ export class ArticleDetailsComponent implements OnInit {
     this.articleService.closeQuestion(this.articleId, commentId).subscribe(
       data => {
         this.articleDetail = data;
+        this.showArticleClosed = true;
+        setTimeout(() => {
+          this.showArticleClosed = false;
+        }, 3000, this);
       },
       err => {
         console.log({ err });

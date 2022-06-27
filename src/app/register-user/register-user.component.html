@@ -10,7 +10,7 @@
 
                 <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
                     {{errorMessage}}
-                  </div>
+                </div>
                 <form [formGroup]="authForm" (ngSubmit)="submitForm()">
                     <fieldset [disabled]="isSubmitting">
 
@@ -21,13 +21,14 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                                formControlName="password">
+                                formControlName="password" [ngClass]="{'is-invalid': errorPasswordNotMatch}">
                             <label for="floatingPassword">Password <span class="danger-color ">*</span></label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="floatingConfirmPassword"
-                                placeholder="confirm password" formControlName="confirmPassword">
-                            <label for="floatingConfirmPassword">confirm password <span class="danger-color ">*</span></label>
+                                placeholder="confirm password" formControlName="confirmPassword"  [ngClass]="{'is-invalid': errorPasswordNotMatch}">
+                            <label for="floatingConfirmPassword">confirm password <span
+                                    class="danger-color ">*</span></label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingFirstName" placeholder="first name"

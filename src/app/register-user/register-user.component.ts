@@ -17,6 +17,7 @@ export class RegisterUserComponent implements OnInit {
   isSubmitting = false;
   authForm: FormGroup;
   errorMessage: string = '';
+  errorPasswordNotMatch = false;
 
   constructor(
     private router: Router,
@@ -40,11 +41,13 @@ export class RegisterUserComponent implements OnInit {
   submitForm() {
 
     this.errorMessage = '';
+    this.errorPasswordNotMatch = false;
 
     const passwordValue = this.authForm.get('password')?.value;
     const confirmPasswordValue = this.authForm.get('confirmPassword')?.value;
 
     if (confirmPasswordValue !== passwordValue) {
+      this.errorPasswordNotMatch = true;
       this.errorMessage = 'Password and confirm password field must match with each other';
       return;
     }
