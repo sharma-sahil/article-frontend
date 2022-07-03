@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ArticleService } from 'src/app/core/article.service';
@@ -10,7 +10,8 @@ import { Product } from 'src/app/shared/models/product.model';
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
-  styleUrls: ['./create-article.component.scss']
+  styleUrls: ['./create-article.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateArticleComponent implements OnInit {
 
@@ -41,8 +42,8 @@ export class CreateArticleComponent implements OnInit {
   ngOnInit() {
     this.articleService.getAllProducts().subscribe(
       data => {
-        console.log({ data });
         this.products = data;
+        this.cd.markForCheck();
       },
       err => console.log({ err })
     )

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleService } from 'src/app/core/article.service';
 import { Errors } from 'src/app/shared/models/errors.model';
@@ -7,7 +7,8 @@ import { ArticlePreview } from 'src/app/shared/models/paged-article-preview-resp
 @Component({
   selector: 'app-article-list',
   templateUrl: './article-list.component.html',
-  styleUrls: ['./article-list.component.scss']
+  styleUrls: ['./article-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleListComponent implements OnInit {
 
@@ -38,6 +39,7 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private router: Router,
     private articleService: ArticleService,
+    private cd: ChangeDetectorRef
 
   ) { }
 
@@ -55,12 +57,16 @@ export class ArticleListComponent implements OnInit {
         this.totalRecords = data.totalRecords;
         if(this.totalRecords <= 0) {
           this.showNoDataFound = true;
+        } else {
+          this.showNoDataFound = false;
         }
         this.updatePagination();
+        this.cd.markForCheck();
       },
       err => {
         console.log({ err });
         this.errors = err;
+        this.cd.markForCheck();
       }
     );
   }
@@ -137,8 +143,11 @@ export class ArticleListComponent implements OnInit {
         this.searchText = '';
         if(this.totalRecords <= 0) {
           this.showNoDataFound = true;
+        } else {
+          this.showNoDataFound = false;
         }
         this.updatePagination();
+        this.cd.markForCheck();
       },
       err => {
         console.log({ err });

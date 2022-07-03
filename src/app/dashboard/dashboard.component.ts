@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DashboardService } from '../core/dashboard.service';
 import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
   totalUsers  = 0;
 
   constructor(
-    
+    private cd: ChangeDetectorRef,
     private dashboardService: DashboardService
   ) { }
 
@@ -22,10 +23,10 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardService.getDasboardStats().subscribe(
       data => {
-        console.log({ data });
         this.totalQuestions = data.totalQuestions;
         this.closedQuestions = data.closedQuestions;
         this.totalUsers = data.totalRegisteredUsers;
+        this.cd.markForCheck();
       },
       err => {
         console.log({ err });

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../core/user.service';
@@ -8,7 +8,8 @@ import { Errors } from '../shared/models/errors.model';
 @Component({
   selector: 'app-register-user',
   templateUrl: './register-user.component.html',
-  styleUrls: ['./register-user.component.sass']
+  styleUrls: ['./register-user.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterUserComponent implements OnInit {
 
@@ -62,7 +63,7 @@ export class RegisterUserComponent implements OnInit {
           if (err.message) {
             this.errorMessage = err.message;
           } else {
-            this.errorMessage = 'Login Failed!!. Please check credentials or try again after some time.'
+            this.errorMessage = 'Failed to register user!!. Please check data or try again after some time.'
           }
           setTimeout(() => {
             this.errorMessage = '';
