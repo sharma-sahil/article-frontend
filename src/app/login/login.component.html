@@ -1,0 +1,34 @@
+<div class="auth-page pt-5">
+    <div class="container page">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3 col-xs-12">
+                <h1 class="text-xs-center">{{ title }}</h1>
+                <p class="text-xs-center">
+                    <a [routerLink]="['/register']">Need an account?</a>
+                </p>
+                <div class="alert alert-danger" role="alert" *ngIf="loginErrorMessage">
+                    {{loginErrorMessage}}
+                  </div>
+                <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+                    <fieldset [disabled]="isSubmitting">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingUsername" placeholder="username"
+                                formControlName="username">
+                            <label for="floatingUsername">Username <span class="danger-color ">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+                                formControlName="password">
+                            <label for="floatingPassword">Password <span class="danger-color ">*</span></label>
+                        </div>
+                        <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+                            {{ title }}
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

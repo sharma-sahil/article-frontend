@@ -1,0 +1,76 @@
+<div class="container pt-5">
+
+    <div class="row justify-content-center mt-3" *ngIf="showArticleClosed">
+        <div class="col-md-6 col-sm-12 text-center alert alert-success">
+            <h3> Article Closed.</h3>
+        </div>
+    </div>
+
+    <div class="card mb-3 et-box-shadow " *ngIf="articleDetail">
+        <div class="card-body">
+            <h3 class="card-title"> {{articleDetail.subject}}</h3>
+            <p class="card-text">{{articleDetail.body}}</p>
+        </div>
+        <div class="card-footer text-muted">
+            by <span class="et-bold-text">{{articleDetail.user.username}}</span> in <span class="et-bold-text">
+                {{articleDetail.product}}</span>
+            <span class="pull-xs-right">
+                <span class="material-symbols-outlined et-fs-1">
+                    calendar_month
+                </span> {{ articleDetail.createdOn | stringToDate }}
+            </span>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="articleDetail && articleDetail.status == 'OPEN'">
+        <form [formGroup]="commentForm" (ngSubmit)="submitForm()">
+            <fieldset [disabled]="isSubmitting">
+                <div class="card mb-3 et-w-90 pull-xs-right et-box-shadow ">
+                    <div class="card-body et-p-0">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="addCommentInput" rows="3"
+                                formControlName="comment"></textarea>
+                            <label for="addCommentInput">Post a new Comment <span class="danger-color ">*</span></label>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary pull-xs-right" [disabled]="!commentForm.valid" type="submit">
+                            Submit
+                        </button>
+
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="container" *ngIf="articleDetail">
+        <div class="card mb-3 et-w-90 pull-xs-right et-box-shadow " *ngFor="let comment of articleDetail.replies">
+            <div class="card-body">
+                <div class="card-text row">
+                    <div class="col">
+                        {{comment.body}}
+                    </div>
+                    <div class="col-auto">
+                        <button *ngIf="articleDetail && articleDetail.status == 'OPEN'" class="btn btn-outline-success"
+                            (click)="closeArticle(comment.id)"> Approve answer</button>
+                    </div>
+                    <div class="col-auto">
+                        <p *ngIf="articleDetail && comment.acceptedAnswer" class="alert alert-success et-round-border">
+                            Approved Answer</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                by {{comment.username}}
+                <span class="pull-xs-right">
+                    <span class="material-symbols-outlined et-fs-1">
+                        calendar_month
+                    </span> {{ comment.createdOn | stringToDate }}
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>

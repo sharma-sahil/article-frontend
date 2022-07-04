@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #f3f3f3;
+}
+
+.text-xs-center {
+  text-align: center !important;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.danger-color {
+    color: red;
+}
+
+.navbar-nav .nav-item {
+    float: left
+}
+
+.navbar-nav .nav-link {
+    display: block;
+    padding-top: .425rem;
+    padding-bottom: .425rem
+}
+
+.navbar-nav .nav-link+.nav-link {
+    margin-left: 1rem
+}
+
+.navbar-nav .nav-item+.nav-item {
+    margin-left: 1rem
+}
+
+.form-floating {
+    label {
+        opacity: 0.5;
+        span {
+            opacity: 1;
+        }
+    }
+}
+
+.btn-link {
+    text-decoration: none;
+}
+
+.et-dashboard-title {
+    margin-top: 20%;
+}
+
+.et-highlight-pointer {
+    cursor: pointer;
+}
+
+.et-fs-1 {
+    font-size: 1rem !important;
+}
+
+.et-w-90 {
+    width: 90% !important;
+}
+
+.et-p-0 {
+    padding: 0 !important;
+}
+
+.et-bold-text {
+    font-weight: bold !important;
+}
+
+
+.pull-xs-left {
+    float: left!important
+}
+
+.pull-xs-right {
+    float: right!important
+}
+
+.pull-xs-none {
+    float: none!important
+}
+
+@media(min-width: 544px) {
+    .pull-sm-left {
+        float:left!important
+    }
+
+    .pull-sm-right {
+        float: right!important
+    }
+
+    .pull-sm-none {
+        float: none!important
+    }
+}
+
+@media(min-width: 768px) {
+    .pull-md-left {
+        float:left!important
+    }
+
+    .pull-md-right {
+        float: right!important
+    }
+
+    .pull-md-none {
+        float: none!important
+    }
+}
+
+@media(min-width: 992px) {
+    .pull-lg-left {
+        float:left!important
+    }
+
+    .pull-lg-right {
+        float: right!important
+    }
+
+    .pull-lg-none {
+        float: none!important
+    }
+}
+
+@media(min-width: 1200px) {
+    .pull-xl-left {
+        float:left!important
+    }
+
+    .pull-xl-right {
+        float: right!important
+    }
+
+    .pull-xl-none {
+        float: none!important
+    }
+}
+
+.pt-10 {
+    padding-top: 10rem !important;
+}
+
+.et-box-shadow {
+    box-shadow: 0 0.188rem 0.375rem 0 rgba(0, 0, 0, 0.16);
+}
+
+.et-round-border {
+    --bs-alert-padding-y: 0.5rem;
+    border-radius: 2rem;
+}

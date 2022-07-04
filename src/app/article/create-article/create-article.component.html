@@ -1,0 +1,41 @@
+<div class="container pt-5">
+    <div class="row">
+
+        <div class="col-md-6 offset-md-3 col-xs-12">
+            <h1 class="text-xs-center">Add a new Question</h1>
+
+            <!-- <app-list-errors [errors]="errors"></app-list-errors> -->
+            <form [formGroup]="articleForm" (ngSubmit)="submitForm()">
+                <fieldset [disabled]="isSubmitting">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingSubject" placeholder="Subject"
+                            formControlName="subject">
+                        <label for="floatingSubject">Subject <span class="danger-color ">*</span></label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingProduct" aria-label="Default select example"
+                            formControlName="product" [ngClass]="{'is-invalid': showProductError}">
+                            <option value="selectProduct" selected>Select a topic</option>
+                            <option *ngFor="let product of products" [value]="product.id" >{{product.name}}</option>
+                        </select>
+                        <label for="floatingProduct">Topic <span class="danger-color ">*</span></label>
+                        <div class="invalid-feedback">
+                            Please select a valid topic.
+                          </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="newQuestionBody" style="height: 10rem"
+                        formControlName="comment" formControlName="body"></textarea>
+                        <label for="newQuestionBody">question body <span
+                                class="danger-color ">*</span></label>
+                    </div>
+                    <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!articleForm.valid" type="submit">
+                        Submit Question
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
